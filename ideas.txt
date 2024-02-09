@@ -1,0 +1,20 @@
+Notes for project ideas
+
+
+
+Be able to validate URLS to ensure that they are the correct website of the company or site that is being claim
+
+Idea 1: 
+	- be able to parse through the HTML of a webpage and search for the name of site or company that the site is claimng to be
+	- pull the URL of the website and be able to validate that the site is https
+	- make sure that the URL contains the name of the website in conjunction with the HTTPS 
+
+
+		- If the website passes these checks than it is the site that is being claimed 
+		
+		- Elif the website does not pass these checkes then the code will execute a search using some tool to arrive to the legit version of the website
+			if the legit website matches the URL of the website in question then it is the real site and no issues; continue; 
+
+		- Else
+			- if the site fails all these checks then alert the user to make sure that they verify the site that they are using by either looking for 
+			- inconsistencies or asking for a second opinion from another person in the household 
