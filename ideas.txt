@@ -18,4 +18,10 @@ Requirments:
 
 	- Else if the site fails all these checks then alert the user to make sure that they verify the site that they are using
 	 by either looking for 
-	- inconsistencies or asking for a second opinion from another person in the household 
+	- inconsistencies or asking for a second opinion from another person in the household
+
+
+ 
+
+
+
