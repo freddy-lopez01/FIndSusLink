@@ -1,10 +1,5 @@
 
-
-
-
-
-
-const currentURL = window.location.href; 
+const currentURL = window.location.href;
 console.log(currentURL)
 
 
