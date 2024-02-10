@@ -82,7 +82,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "f8ddbc2b67335640",
@@ -159,7 +160,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d3f6fdf8cd60b80f",
+  "active": "c51181a261fc12ad",
   "lastOpenFiles": [
     "FindSusLink Documentation.md",
     "Welcome.md"
