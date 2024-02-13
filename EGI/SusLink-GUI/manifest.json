@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name":"FindSusLink",
+  "version": "0.1",
+  "description": "ad blocker and malicious webpage finder",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
