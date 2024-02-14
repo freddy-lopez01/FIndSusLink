@@ -1,0 +1,27 @@
+html {
+  width: 1000;
+  height: 750;
+  background-color: #BBB793;
+}
+
+
+div {
+  background-color: #BBB793;
+  color: #000000 ;
+  padding: 25px;
+}
+
+.button {
+  background-color: aliceblue;
+  border: none;
+  color:#000000;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+
+
+.button1 {border-radius: 12px;}
