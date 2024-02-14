@@ -4,6 +4,15 @@ html {
   background-color: #add2c9;
 }
 
+.head {
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+}
+
 
 .gui-header {
   padding: 10px 15px;
