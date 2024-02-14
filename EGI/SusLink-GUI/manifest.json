@@ -3,6 +3,12 @@
   "name":"FindSusLink",
   "version": "0.1",
   "description": "ad blocker and malicious webpage finder",
+  "icons": {
+    "16": "assets/susguardlogo-16.png",
+    "32": "assets/susguardlogo-32.png",
+    "48": "assets/susguardlogo-48.png",
+    "128": "assets/susguardlogo-128.png"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -14,4 +20,5 @@
   "action": {
     "default_popup": "popup.html"
   }
+
 }
