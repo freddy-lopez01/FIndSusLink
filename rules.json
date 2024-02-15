@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "priority": 1,
+        "action": {
+            "type": "redirect",
+            "redirect": {
+                "url": "chrome-extension://ffgekjkhbncbmhkofhhojbjoejnjbegh/warning.html?redirect=||url||"
+            }
+        },
+        "condition": {
+            "urlFilter": "http://*/*",
+            "resourceTypes": ["main_frame"]
+        }
+    }
+]

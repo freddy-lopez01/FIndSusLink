@@ -7,15 +7,7 @@
         <h1>Security Warning</h1>
         <p>You are attempting to access a non-HTTPS website, which may not be secure.</p>
         <p id="redirectUrl"></p>
-        <button onclick="proceed()">Proceed Anyway</button>
-        <script>
-            const params = new URLSearchParams(window.location.search);
-            const redirectUrl = params.get('redirect');
-            document.getElementById('redirectUrl').innerText = `URL: ${decodeURIComponent(redirectUrl)}`;
-            
-            function proceed() {
-                window.location.href = decodeURIComponent(redirectUrl);
-            }
-        </script>
+        <button id="proceedButton">Proceed Anyway</button>
+        <script src="warning.js"></script>
     </body>
 </html>
