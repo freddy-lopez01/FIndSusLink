@@ -3,6 +3,12 @@
 	"name": "Find sus link",
 	"version": "1.0",
 	"description": "Ad-blocker extension for Chrome",
+	"icons": {
+		"16": "assets/susguardlogo-16.png",
+		"32": "assets/susguardlogo-32.png",
+		"48": "assets/susguardlogo-48.png",
+		"128": "assets/susguardlogo-128.png"
+	  },
 	"permissions": [
         "activeTab",
         "tabs",
