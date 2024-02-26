@@ -9,10 +9,7 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  
-  
   }
-  
   
   .gui-header {
     padding: 10px 15px;

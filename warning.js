@@ -15,3 +15,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.error('No redirect URL provided');
     }
 });
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const params = new URLSearchParams(window.location.search);
+    const redirectUrl = params.get('redirect');
+    
+    if (redirectUrl) {
+        const urlDisplayElement = document.getElementById('redirectUrl');
+        urlDisplayElement.textContent = decodeURIComponent(redirectUrl);
+        
+        const proceedButton = document.getElementById('proceedButton');
+        proceedButton.addEventListener('click', () => {
+            window.location.href = decodeURIComponent(redirectUrl);
+        });
+        
+        const cancelButton = document.getElementById('cancelButton');
+        cancelButton.addEventListener('click', () => {
+            window.close(); // Close the warning tab
+        });
+    } else {
+        console.error('No redirect URL provided');
+    }
+});

@@ -13,7 +13,8 @@
         "activeTab",
         "tabs",
         "declarativeNetRequest",
-        "declarativeNetRequestFeedback"
+        "declarativeNetRequestFeedback",
+		"webNavigation"
     ],
 	"declarative_net_request": {
         "rule_resources": [{
@@ -42,7 +43,7 @@
 	},
 	"web_accessible_resources": [
 		{
-			"resources": ["warning.html", "warning.js"],
+			"resources": ["warning.html", "warning.js", "badurls.json"],
 			"matches": ["<all_urls>"]
 		}
 	]
