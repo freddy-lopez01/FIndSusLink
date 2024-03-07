@@ -131,7 +131,12 @@ html {
     opacity: 1;
     right: 0;
   }
+
   .button1 {
     border-radius: 12px;
+  }
+
+  .exit {
+    cursor: default
   }
   

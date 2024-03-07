@@ -14,7 +14,8 @@
         "tabs",
         "declarativeNetRequest",
         "declarativeNetRequestFeedback",
-		"webNavigation"
+		"webNavigation",
+		"scripting"
     ],
 	"declarative_net_request": {
         "rule_resources": [{
@@ -38,7 +39,10 @@
 	"action": {
 		"default_popup": "popup.html",
 		"default_icon": {
-		  "16": "images/icon16.png"
+		  "16": "assets/susguardlogo-16.png",
+		  "32": "assets/susguardlogo-32.png",
+		  "48": "assets/susguardlogo-48.png",
+		  "128": "assets/susguardlogo-128.png"
 		}
 	},
 	"web_accessible_resources": [

@@ -22,35 +22,50 @@ function scanTabs() {
             .map(tab => ({ url: tab.url, title: tab.title }));
         
         // Send the information to the popup
-        chrome.runtime.sendMessage({ maliciousTabsInfo });
+        if (popupPort) {
+            popupPort.postMessage({ maliciousTabsInfo });
+        }
     });
 }
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.action === 'scanTabs') {
-        scanTabs();
-    }
+let popupPort = null;
+chrome.runtime.onConnect.addListener(function(port) {
+    console.assert(port.name === "popup");
+    popupPort = port;
+
+    port.onDisconnect.addListener(function() {
+        popupPort = null;
+    });
+
+    port.onMessage.addListener(function(message) {
+        if (message.action === 'scanTabs') {
+            scanTabs();
+        }
+    });
 });
 
 loadBadUrls();
 
-chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-    const urlToCheck = details.url;
-    if (badUrls.includes(urlToCheck)) {
-      // You can redirect to a warning page or block the navigation here
-      // For example:
-      chrome.tabs.update(details.tabId, {
-        url: chrome.runtime.getURL("warning.html") + "?redirect=" + encodeURIComponent(urlToCheck),
-      });
-    }
-  }, { url: [{ urlMatches: 'http://*/*' }, { urlMatches: 'https://*/*' }] });
-
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    // Ensure we check when the URL of a tab changes
-    if (changeInfo.url) {
-        checkUrlAndBlockIfNeeded(tabId, changeInfo.url);
+    if (changeInfo.status === 'loading' && changeInfo.url && !changeInfo.url.startsWith('https://')) {
+        // Check if the URL is non-HTTPS and not in the bad URLs list
+        if (!isMalicious(changeInfo.url)) {
+            try {
+                chrome.runtime.sendMessage({
+                    action: "showWarning",
+                    url: changeInfo.url
+                });
+            } catch (e) {
+                console.error('Error sending message to popup:', e);
+            }
+        }
     }
 });
+
+// This function will be serialized and executed in the context of the webpage
+function showAlert() {
+    alert('Warning: You are attempting to access a non-HTTPS site. This may not be secure.');
+}
 
 function checkUrlAndBlockIfNeeded(tabId, url) {
     // Load your bad URLs list into badUrls somehow, e.g., from a JSON file or directly as an array
