@@ -1,6 +1,6 @@
 {
 	"manifest_version": 3,
-	"name": "Find sus link",
+	"name": "SusGuard",
 	"version": "1.0",
 	"description": "Ad-blocker extension for Chrome",
 	"icons": {
