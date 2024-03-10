@@ -12147,5 +12147,4 @@ var blocked_sites_v2 = [
 "*://*.zumobi.com/*",
 "*://*.zwaar.org/*",
 "*://*.api.zwizzarmyknife.com/*",
-"*://*.log-collector.svctr.zynga.com/*",
-"*://*.youtube.com"]
+"*://*.log-collector.svctr.zynga.com/*"]

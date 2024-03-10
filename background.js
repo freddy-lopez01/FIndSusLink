@@ -29,7 +29,6 @@ function scanTabs() {
 }
 
 let popupPort = null;
-
 chrome.runtime.onConnect.addListener(function(port) {
     console.assert(port.name === "popup");
     popupPort = port;

@@ -1,0 +1,1 @@
+console.log("Simple Pop-Up Blocker content script loaded.");
