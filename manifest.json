@@ -1,0 +1,42 @@
+{
+    "manifest_version": 3,
+    "name": "SusGuard",
+    "version": "1.0",
+    "description": "Ad blocker chrome extension",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "css": ["focus-mode.css"]
+        }
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "assets/susguard-16.png",
+            "48": "assets/susguard-48.png",
+            "128": "assets/susguard-128.png"
+        }
+    },
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "declarativeNetRequest"
+    ],
+    "declarative_net_request": {
+        "rule_resources": [
+            {
+                "id": "ruleset_1",
+                "enabled": true,
+                "path": "rules.json"
+            }
+        ]
+    },
+    "icons": {
+        "16": "assets/susguard-16.png",
+        "48": "assets/susguard-48.png",
+        "128": "assets/susguard-128.png"
+    }
+}
