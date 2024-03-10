@@ -1,4 +1,5 @@
 let badUrls = [];
+let tabAllowance = {};
 
 async function loadBadUrls() {
     try {
@@ -12,7 +13,14 @@ async function loadBadUrls() {
 }
 
 function isMalicious(url) {
-    return badUrls.some(badUrl => url.includes(badUrl));
+    return badUrls.some(pattern => {
+        // Convert wildcard URL patterns to regex
+        const regexPattern = pattern
+            .replace(/[.+^${}()|[\]\\]/g, '\\$&') // Escape regex characters
+            .replace(/\*/g, '.*'); // Convert * wildcards to .*
+        const regex = new RegExp(regexPattern);
+        return regex.test(url);
+    });
 }
 
 function scanTabs() {
@@ -29,6 +37,7 @@ function scanTabs() {
 }
 
 let popupPort = null;
+
 chrome.runtime.onConnect.addListener(function(port) {
     console.assert(port.name === "popup");
     popupPort = port;
@@ -44,32 +53,38 @@ chrome.runtime.onConnect.addListener(function(port) {
     });
 });
 
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'allowUrl' && sender.tab) {
+        // Store that the current tab's URL is allowed
+        tabAllowance[sender.tab.id] = message.url;
+        sendResponse({status: 'URL allowed for tab'});
+    }
+});
+
 loadBadUrls();
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status === 'loading' && changeInfo.url && !changeInfo.url.startsWith('https://')) {
-        // Check if the URL is non-HTTPS and not in the bad URLs list
-        if (!isMalicious(changeInfo.url)) {
-            try {
-                chrome.runtime.sendMessage({
-                    action: "showWarning",
-                    url: changeInfo.url
-                });
-            } catch (e) {
-                console.error('Error sending message to popup:', e);
-            }
+    if (changeInfo.status === 'loading') {
+        // Prevent redirection if the tab is already showing the warning page
+        if (new URL(changeInfo.url).pathname.endsWith('warning.html')) {
+            return;
+        }
+        
+        // Check if the tab has an allowance or if the URL is malicious
+        if (tabAllowance[tabId] !== changeInfo.url && isMalicious(changeInfo.url)) {
+            const warningUrl = chrome.runtime.getURL("warning.html") + "?redirect=" + encodeURIComponent(changeInfo.url);
+            chrome.tabs.update(tabId, { url: warningUrl });
         }
     }
 });
 
-// This function will be serialized and executed in the context of the webpage
-function showAlert() {
-    alert('Warning: You are attempting to access a non-HTTPS site. This may not be secure.');
-}
+chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
+    // Clean up the allowance when the tab is closed
+    delete tabAllowance[tabId];
+});
 
 function checkUrlAndBlockIfNeeded(tabId, url) {
     // Load your bad URLs list into badUrls somehow, e.g., from a JSON file or directly as an array
-    const badUrls = ["list", "of", "bad", "urls"]; // Simplified example
     const isBadUrl = badUrls.some(badUrl => url.includes(badUrl));
 
     if (isBadUrl) {
