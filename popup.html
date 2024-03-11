@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="gui-style.css">
+        <link rel="stylesheet" type="text/css" href="gui-style.css">
+        <div class="exit" id="closeButton">&times;</div>
     </head>
     <body>
         <div class="gui" id="gui">
@@ -10,7 +11,12 @@
                     <img src="assets/susguard-16.png", alt="SUSGUARD">
                 </div>
             </div>
-
+            <div id="securityWarning" style="display:none;">
+                <h2>Security Warning</h2>
+                <p>You are attempting to access a non-HTTPS website, which may not be secure.</p>
+                <p id="urlWarning"></p>
+                <button id="proceedButton">Proceed Anyway</button>
+            </div>
             <div class="center">
                 <div class="wave"></div>
                 <div class="wave"></div>
@@ -23,10 +29,8 @@
                 <div class="wave"></div>
                 <div class="wave"></div>
             </div>
-            <button class="button" value="Scan">
-                <span>Scan</span>
-            </button>
+            <button id ="scanButton" class="button"><span>Scan</span></button>
         </div>
-
+        <script src="popup.js"></script>
     </body>
 </html>
