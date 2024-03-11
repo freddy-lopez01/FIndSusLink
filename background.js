@@ -104,3 +104,11 @@ chrome.action.onClicked.addListener((tab) => {
         chrome.tabs.create({ url: chrome.runtime.getURL("popup.html") });
     }
 });
+
+chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
+  chrome.storage.local.get({blockedCount: 0}, (result) => {
+    chrome.storage.local.set({blockedCount: result.blockedCount + 1});
+  });
+});
+
+
