@@ -64,13 +64,22 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 loadBadUrls();
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status === 'loading') {
-        // Prevent redirection if the tab is already showing the warning page
-        if (new URL(changeInfo.url).pathname.endsWith('warning.html')) {
+    if (changeInfo.status === 'loading' && changeInfo.url) {
+        let urlObj;
+        try {
+            urlObj = new URL(changeInfo.url);
+        } catch (error) {
+            console.error("Failed to construct URL:", changeInfo.url, error);
+			// exit if URL construction fails
+            return;
+        }
+
+        // check if pathname ends with warning.html to prevent redirection loop
+        if (urlObj.pathname.endsWith('warning.html')) {
             return;
         }
         
-        // Check if the tab has an allowance or if the URL is malicious
+        // Check if the tab's URL is allowed or if it's malicious
         if (tabAllowance[tabId] !== changeInfo.url && isMalicious(changeInfo.url)) {
             const warningUrl = chrome.runtime.getURL("warning.html") + "?redirect=" + encodeURIComponent(changeInfo.url);
             chrome.tabs.update(tabId, { url: warningUrl });
