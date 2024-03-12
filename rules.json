@@ -24,5 +24,11 @@
             "urlFilter": "http://*/*",
             "resourceTypes": ["main_frame"]
         }
-    }
+    },
+	{
+		"id": 4,
+		"priority": 1,
+		"action": { "type": "block" },
+		"condition": { "urlFilter": "*://*.google-analytics.com/*"}
+	}
 ]

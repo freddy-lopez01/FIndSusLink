@@ -41,3 +41,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+/* Count number of total blocked ads */
+document.addEventListener("DOMContentLoaded", function() {
+  chrome.storage.local.get({blockedCount: 0}, (result) => {
+    document.getElementById("ad_block_count").textContent = `Blocked ads: ${result.blockedCount}`;
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  chrome.storage.local.get({trackerCount: 0}, (result) => {
+    document.getElementById("tracker_block_count").textContent = `Trackers blocked: ${result.trackerCount}`;
+  });
+});
+
+
