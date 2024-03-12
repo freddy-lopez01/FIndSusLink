@@ -111,4 +111,9 @@ chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
   });
 });
 
+chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
+  chrome.storage.local.get({trackerCount: 0}, (result) => {
+    chrome.storage.local.set({trackerCount: result.trackerCount + 1});
+  });
+});
 

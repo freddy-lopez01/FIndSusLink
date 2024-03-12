@@ -49,3 +49,10 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  chrome.storage.local.get({trackerCount: 0}, (result) => {
+    document.getElementById("tracker_block_count").textContent = `Trackers blocked: ${result.trackerCount}`;
+  });
+});
+
+
