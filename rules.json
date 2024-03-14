@@ -17,7 +17,7 @@
         "action": {
             "type": "redirect",
             "redirect": {
-                "url": "chrome-extension://hckbfoahajbbdfdblamhhkaelbniapao/warning.html?redirect=||url||"
+                "url": "chrome-extension://jcbfnnlipjimnnpfabijadbdilepehbk/warning.html?redirect=||url||"
             }
         },
         "condition": {
