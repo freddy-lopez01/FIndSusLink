@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="gui-style.css">
+        <div class="exit" id="closeButton">&times;</div>
+    </head>
+    <body>
+        <div class="gui" id="gui">
+            <div class="gui-header">
+                <div class="logo">
+                    <img src="assets/susguard-16.png", alt="SUSGUARD">
+                </div>
+            </div>
+            <div id="securityWarning" style="display:none;">
+                <h2>Security Warning</h2>
+                <p>You are attempting to access a non-HTTPS website, which may not be secure.</p>
+                <p id="urlWarning"></p>
+                <button id="proceedButton">Proceed Anyway</button>
+            </div>
+			<div id="ad_block_count">Total blocked ads: 0</div>
+			<div id="tracker_block_count">Total trackers blocked: 0</div>
+            <div class="center">
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div>
+            <button id ="scanButton" class="button"><span>Scan</span></button>
+        </div>
+        <script src="popup.js"></script>
+    </body>
+</html>
